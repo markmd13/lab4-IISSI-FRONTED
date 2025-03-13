@@ -4,7 +4,7 @@ import { StyleSheet, View, FlatList, Pressable } from 'react-native'
 import TextRegular from '../../components/TextRegular'
 import { API_BASE_URL } from '@env'
 
-export default function RestaurantDetailScreen({ route }) {
+export default function RestaurantDetailScreen ({ route }) {
   const { id } = route.params
   return (
     <View style={styles.container}>

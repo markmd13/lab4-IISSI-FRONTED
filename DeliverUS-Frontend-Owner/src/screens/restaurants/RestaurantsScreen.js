@@ -7,7 +7,7 @@ import TextSemiBold from '../../components/TextSemibold'
 import { API_BASE_URL } from '@env'
 import restaurantLogo from '../../../assets/restaurantLogo.jpeg'
 
-export default function RestaurantsScreen({ navigation }) {
+export default function RestaurantsScreen ({ navigation }) {
   return (
     <View style={styles.container}>
       <TextRegular style={{ fontSize: 16, alignSelf: 'center', margin: 20 }}>Random Restaurant</TextRegular>
@@ -27,11 +27,40 @@ export default function RestaurantsScreen({ navigation }) {
         <TextRegular textStyle={styles.text}>
           Go to Random Restaurant Details
         </TextRegular>
+        <FlatList
+        style={styles.container}
+        data={restaurants}
+        renderItem={renderRestaurant}
+        keyExtractor={item => item.id.toString()}
+      />
       </Pressable>
     </View>
   )
 }
 
+const [restaurants, setRestaurants] = useState([])
+
+useEffect(() => {
+  console.log('Loading restaurants, please wait 2 seconds')
+  setTimeout(() => {
+    setRestaurants(getAll) // getAll function has to be imported
+    console.log('Restaurants loaded')
+  }, 2000)
+}, [])
+
+const renderRestaurant = ({ item }) => {
+  return (
+    <Pressable
+      style={styles.row}
+      onPress={() => {
+        navigation.navigate('RestaurantDetailScreen', { id: item.id })
+      }}>
+        <TextRegular>
+            {item.name}
+        </TextRegular>
+    </Pressable>
+  )
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1
